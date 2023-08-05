@@ -43,8 +43,8 @@ node{
             sh 'java -jar insure-me-runnable.jar'
         }
 
-        stage('configure test-server and deploy insure-me'){
-            echo "configuring test-server"
+        stage('Configure PROD server and deploy insure-me'){
+            echo "Configuring PROD Server"
           //  sh 'ansible-playbook configure-test-server.yml'
             ansiblePlaybook become: true, credentialsId: 'ansible-user', disableHostKeyChecking: true, installation: 'Ansible', inventory: '/etc/ansible/hosts', playbook: 'configure-prod-server.yml'
             
