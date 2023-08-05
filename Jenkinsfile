@@ -43,6 +43,11 @@ node{
             sh 'java -jar insure-me-runnable.jar'
         }
 
+        stage('GIT Checkout'){
+            echo 'Check out application code from GIT'
+            git 'https://github.com/mohan-kpm/insurance-project-demo.git'
+        }
+
         stage('Configure PROD server and deploy insure-me'){
             echo "Configuring PROD Server"
           //  sh 'ansible-playbook configure-test-server.yml'
