@@ -1,15 +1,15 @@
 ---
-- hosts: test-server
+- hosts: Test-server
   become: true
   tasks:
-  - name: update apt
-    command: sudo apt-get update
+  - name: yum update
+    command: sudo yum update
 
-  - name: install docker
-    command: sudo apt install -y docker.io
+  - name: Install docker
+    command: sudo yum install -y docker-ce
 
-  - name: start docker service
+  - name: Start docker service
     command: sudo systemctl start docker
 
-  - name: deploy insureme application
-    command: sudo docker run -itd -p 8081:8081 --name insure-me shubhamkushwah123/insure-me:1.0
+  - name: Deploy insureme application
+    command: sudo docker run -itd -p 8081:8081 --name insure-me mohandocker8/insure-me:3.0
