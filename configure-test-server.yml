@@ -1,5 +1,5 @@
 ---
-- hosts: Test-server
+- hosts: testserver
   become: true
   tasks:
   - name: yum update
