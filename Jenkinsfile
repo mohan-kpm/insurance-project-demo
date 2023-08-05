@@ -26,7 +26,28 @@ node{
             echo "configuring test-server"
           //  sh 'ansible-playbook configure-test-server.yml'
             ansiblePlaybook become: true, credentialsId: 'ansible-user', disableHostKeyChecking: true, installation: 'Ansible', inventory: '/etc/ansible/hosts', playbook: 'configure-test-server.yml'
-            
         }
+
+        stage('Code Checkout'){
+            echo 'checking out the code from git repo'
+            git 'https://github.com/mohan-kpm/insure-me-test.git'
+        }
+    
+        stage('Code Build'){
+            echo 'build includes.. clean... compile... test... package...'
+            sh 'mvn clean package'
+        }
+    
+        stage('Code Test'){
+            echo 'Running Test'
+            sh 'java -jar insure-me-runnable.jar'
+        }
+
+        stage('configure test-server and deploy insure-me'){
+            echo "configuring test-server"
+          //  sh 'ansible-playbook configure-test-server.yml'
+            ansiblePlaybook become: true, credentialsId: 'ansible-user', disableHostKeyChecking: true, installation: 'Ansible', inventory: '/etc/ansible/hosts', playbook: 'configure-prod-server.yml'
+            
+        }        
         
 }
